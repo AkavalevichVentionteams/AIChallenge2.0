@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EDU - Company Leader Board 2025</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+  <style>
+    :root {
+      --page-bg: #efeff2;
+      --surface: #ffffff;
+      --surface-soft: #f8fafc;
+      --border: #d9e0ea;
+      --border-strong: #cfd7e3;
+      --text: #0f172a;
+      --muted: #667085;
+      --muted-soft: #94a3b8;
+      --accent: #1990ff;
+      --accent-strong: #0b83e6;
+      --shadow: 0 1px 2px rgba(15, 23, 42, 0.08);
+      --font: Segoe UI, -apple-system, BlinkMacSystemFont, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; min-height: 100%; background: var(--page-bg); color: var(--text); font-family: var(--font); }
+    body { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+    button, input { font: inherit; }
+    button { cursor: pointer; }
+
+    .leaderboard_2943a085 { background: var(--page-bg); color: var(--text); min-height: 100vh; padding: 12px 8px 24px; }
+    .pageTitle_2943a085 { color: var(--text); font-size: 24px; font-weight: 700; line-height: 1.15; margin: 0 auto 20px; max-width: 1200px; }
+    .leaderboardShell { max-width: 1200px; margin: 0 auto; }
+    .leaderboardPanel_2943a085 { background: #fbfcff; padding: 18px 18px 20px; }
+
+    .header_2943a085 { align-items: flex-start; display: flex; justify-content: space-between; margin: 0 auto 24px; max-width: 1200px; }
+    .headerContent_2943a085 { flex: 1; }
+    .headerContent_2943a085 h2 { color: var(--text); font-size: 18px; font-weight: 700; margin: 0 0 6px; }
+    .headerContent_2943a085 p { color: var(--muted); font-size: 12px; margin: 0; }
+
+    .filterBar_2943a085 { align-items: flex-start; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; box-shadow: var(--shadow); display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; margin: 0 auto 24px; max-width: 1200px; padding: 16px 20px; }
+    .filters_2943a085 { display: flex; flex-wrap: wrap; gap: 12px; align-items: flex-start; }
+    .filterGroup_2943a085 { position: relative; min-width: 168px; }
+    .filterLabel_2943a085 { color: var(--muted-soft); display: block; font-size: 11px; font-weight: 600; letter-spacing: 0.06em; margin: 0 0 6px; text-transform: uppercase; }
+    .filterControl_2943a085 { align-items: center; background: #e3e3e3; border: 1px solid var(--border-strong); border-radius: 2px; color: var(--text); display: flex; justify-content: space-between; min-height: 30px; padding: 0 10px; width: 100%; box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6); }
+    .filterControl_2943a085.is-open { border-color: #8dc5ff; box-shadow: 0 0 0 3px rgba(25, 144, 255, 0.08); }
+    .filterValue_2943a085 { font-size: 12px; line-height: 28px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .filterCaret_2943a085 { color: #64748b; font-size: 14px; margin-left: 10px; transition: transform .2s ease; }
+    .filterControl_2943a085.is-open .filterCaret_2943a085 { transform: rotate(180deg); color: var(--accent-strong); }
+    .dropdownPanel_2943a085 { background: var(--surface); border: 1px solid var(--border-strong); box-shadow: 0 8px 20px rgba(15, 23, 42, 0.12); display: none; line-height: 1.2em; position: absolute; top: calc(100% + 4px); left: 0; width: 100%; z-index: 99; border-radius: 2px; overflow: hidden; }
+    .dropdownPanel_2943a085.open { display: block; }
+    .dropdownList_2943a085 { max-height: 280px; overflow: auto; padding: 4px 0; }
+    .dropdownItem_2943a085 { background: transparent; border: 0; color: inherit; cursor: pointer; display: block; font-size: 12px; font-weight: 400; padding: 0.6em 1em; text-align: left; width: 100%; }
+    .dropdownItem_2943a085:hover, .dropdownItem_2943a085.is-selected { background: #f1f5f9; color: #000; }
+
+    .search_2943a085 { align-self: flex-end; flex: 1; min-width: 250px; }
+    .searchBox_2943a085 { align-items: center; background: #e3e3e3; border: 1px solid var(--border-strong); border-radius: 2px; display: flex; min-height: 30px; padding: 0 10px; width: 100%; box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6); }
+    .searchBox_2943a085:focus-within { border-color: #8dc5ff; box-shadow: 0 0 0 3px rgba(25, 144, 255, 0.08); }
+    .searchIcon_2943a085 { color: #94a3b8; font-size: 14px; margin-right: 8px; flex: 0 0 auto; }
+    .searchInput_2943a085 { background: #e3e3e3; border: 0; color: var(--text); flex: 1; min-width: 0; outline: none; padding: 0; height: 28px; font-size: 12px; }
+
+    .podium_2943a085 { align-items: flex-end; display: flex; gap: 24px; justify-content: center; margin: 0 auto 56px; max-width: 900px; padding: 24px 8px 40px; }
+    .podiumColumn_2943a085 { align-items: center; display: flex; flex-direction: column; max-width: 280px; position: relative; width: 100%; }
+    .podiumColumn_2943a085.podiumRank1_2943a085 { margin-top: -30px; order: 2; }
+    .podiumColumn_2943a085.podiumRank2_2943a085 { order: 1; }
+    .podiumColumn_2943a085.podiumRank3_2943a085 { order: 3; }
+    .podiumUser_2943a085 { align-items: center; display: flex; flex-direction: column; margin-bottom: 16px; position: relative; z-index: 10; text-align: center; }
+    .podiumAvatarContainer_2943a085 { margin-bottom: 12px; position: relative; }
+    .avatar_2943a085, .podiumAvatar_2943a085, .commentAvatar_2943a085 { color: transparent; font-size: 0; text-indent: -9999px; overflow: hidden; position: relative; background-color: #ecf1ff; background-image: linear-gradient(135deg, rgba(79, 96, 220, 0.96) 25%, transparent 25%), linear-gradient(225deg, rgba(79, 96, 220, 0.96) 25%, transparent 25%), linear-gradient(315deg, rgba(79, 96, 220, 0.96) 25%, transparent 25%), linear-gradient(45deg, rgba(79, 96, 220, 0.96) 25%, transparent 25%); background-size: 16px 16px; background-position: 0 0, 0 8px, 8px -8px, -8px 0; }
+    .avatar_2943a085, .commentAvatar_2943a085 { border-radius: 50%; }
+    .podiumAvatar_2943a085 { align-items: center; border-radius: 50%; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); display: flex; font-weight: 700; justify-content: center; background-position: 50%; background-size: cover; border: 4px solid #fff; }
+    .podiumRank1_2943a085 .podiumAvatar_2943a085 { border-color: #f6b01d; }
+    .podiumRank2_2943a085 .podiumAvatar_2943a085 { border-color: #d7dde7; }
+    .podiumRank3_2943a085 .podiumAvatar_2943a085 { border-color: #c8892f; }
+    .podiumRankBadge_2943a085 { align-items: center; background: #fff; border: 1px solid var(--border); border-radius: 50%; bottom: -8px; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); display: flex; font-weight: 700; justify-content: center; position: absolute; right: -8px; color: var(--text); }
+    .podiumColumn_2943a085.podiumRank1_2943a085 .podiumRankBadge_2943a085 { background: #f6b01d; border-color: #f6b01d; color: #fff; }
+    .podiumColumn_2943a085.podiumRank2_2943a085 .podiumRankBadge_2943a085 { background: #94a3b8; border-color: #94a3b8; color: #fff; }
+    .podiumColumn_2943a085.podiumRank3_2943a085 .podiumRankBadge_2943a085 { background: #a16207; border-color: #a16207; color: #fff; }
+    .podiumName_2943a085 { color: var(--text); font-size: 16px; font-weight: 700; margin: 0 0 4px; }
+    .podiumRole_2943a085 { color: var(--muted); font-size: 11px; letter-spacing: 0.02em; margin: 0 0 10px; text-transform: uppercase; }
+    .podiumScore_2943a085 { align-items: center; background: #fff; border: 1px solid #cfe0ff; border-radius: 999px; box-shadow: 0 1px 2px rgba(15, 23, 42, 0.06); color: var(--accent-strong); display: inline-flex; font-weight: 700; gap: 6px; padding: 5px 12px; }
+    .podiumRank1_2943a085 .podiumScore_2943a085 { border-color: #f0c83c; background: #fffbe8; color: #d18a00; }
+    .scoreIcon_2943a085 { color: var(--accent); font-size: 16px; }
+    .podiumBlock_2943a085 { background: linear-gradient(180deg, #edf3fa 0%, #d9e2ed 100%); border: 1px solid #cfd8e4; border-bottom: 0; border-radius: 10px 10px 0 0; box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.65); height: 120px; position: relative; width: 100%; overflow: hidden; }
+    .podiumBlock_2943a085::before { color: rgba(148, 163, 184, 0.26); content: attr(data-rank); font-size: 84px; font-weight: 700; left: 50%; line-height: 1; position: absolute; top: 50%; transform: translate(-50%, -50%); }
+    .podiumColumn_2943a085.podiumRank1_2943a085 .podiumBlock_2943a085 { background: linear-gradient(180deg, #fff8cc 0%, #f7e07b 100%); border-color: #efc94d; height: 180px; }
+    .podiumColumn_2943a085.podiumRank2_2943a085 .podiumBlock_2943a085 { height: 145px; }
+    .podiumColumn_2943a085.podiumRank3_2943a085 .podiumBlock_2943a085 { height: 115px; }
+    .podiumColumn_2943a085.podiumRank1_2943a085 .podiumBlock_2943a085::before { color: rgba(234, 179, 8, 0.25); font-size: 94px; }
+
+    .users_2943a085 { display: flex; flex-direction: column; gap: 12px; max-width: 1200px; margin: 0 auto; }
+    .userRowContainer_2943a085 { background: #fff; border: 1px solid var(--border); border-radius: 10px; box-shadow: var(--shadow); overflow: hidden; }
+    .userRow_2943a085 { align-items: center; display: flex; justify-content: space-between; gap: 16px; padding: 14px 20px; }
+    .userIdentity_2943a085 { align-items: center; display: flex; gap: 14px; min-width: 0; flex: 1; }
+    .rank_2943a085 { color: #98a2b3; font-size: 18px; font-weight: 700; min-width: 24px; text-align: center; flex: 0 0 auto; }
+    .avatar_2943a085 { align-items: center; border-radius: 50%; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); color: #0f172a; display: flex; flex: 0 0 auto; font-weight: 700; justify-content: center; }
+    .userInfo_2943a085 { min-width: 0; }
+    .userName_2943a085 { color: var(--text); font-size: 14px; font-weight: 700; margin: 0 0 2px; }
+    .userRole_2943a085 { color: var(--muted); font-size: 11px; letter-spacing: 0.02em; margin: 0; text-transform: uppercase; }
+    .userStats_2943a085 { align-items: center; display: flex; gap: 12px; flex-wrap: wrap; justify-content: flex-end; }
+    .categoryStat_2943a085 { align-items: center; display: inline-flex; flex-direction: column; gap: 2px; min-width: 34px; }
+    .categoryIcon_2943a085 { align-items: center; color: var(--accent-strong); display: inline-flex; font-size: 15px; justify-content: center; line-height: 1; }
+    .categoryCount_2943a085 { color: #667085; font-size: 11px; font-weight: 600; }
+    .userTotal_2943a085 { align-items: flex-end; border-left: 1px solid var(--border); display: flex; flex-direction: column; gap: 0; margin-left: 2px; min-width: 74px; padding-left: 14px; }
+    .totalLabel_2943a085 { color: #98a2b3; font-size: 10px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
+    .totalScore_2943a085 { align-items: center; color: var(--accent-strong); display: inline-flex; font-size: 18px; font-weight: 700; gap: 5px; }
+    .expandButton_2943a085 { align-items: center; background: #eff6ff; border: 0; border-radius: 50%; color: var(--accent-strong); display: inline-flex; height: 30px; justify-content: center; width: 30px; transition: background .2s, transform .2s; flex: 0 0 auto; }
+    .expandButton_2943a085:hover { background: #dbeafe; }
+    .expandButton_2943a085 i { font-size: 18px; transition: transform .2s ease; }
+    .userRowContainer_2943a085.expanded_2943a085 .expandButton_2943a085 { background: #e0f2fe; }
+    .userRowContainer_2943a085.expanded_2943a085 .expandButton_2943a085 i { transform: rotate(180deg); }
+    .details_2943a085 { background: #f8fafc; border-top: 1px solid #e2e8f0; display: none; padding: 18px 20px 20px; }
+    .userRowContainer_2943a085.expanded_2943a085 .details_2943a085 { display: block; }
+    .detailsTitle_2943a085 { color: var(--muted); font-size: 11px; font-weight: 600; letter-spacing: 0.06em; margin: 0 0 14px; text-transform: uppercase; }
+    .tableWrapper_2943a085 { overflow-x: auto; }
+    .activityTable_2943a085 { border-collapse: collapse; width: 100%; }
+    .activityTable_2943a085 thead tr { border-bottom: 2px solid #e2e8f0; }
+    .activityTable_2943a085 thead th { color: var(--muted); font-size: 11px; font-weight: 600; letter-spacing: 0.06em; padding: 10px 8px; text-align: left; text-transform: uppercase; }
+    .activityTable_2943a085 thead th:last-child { text-align: right; }
+    .activityTable_2943a085 tbody tr:hover { background: #f8fafc; }
+    .activityTable_2943a085 tbody td { border-bottom: 1px solid #e2e8f0; font-size: 13px; padding: 14px 8px; vertical-align: middle; }
+    .activityTable_2943a085 tbody tr:last-child td { border-bottom: none; }
+    .activityName_2943a085 { color: #111827; font-weight: 600; }
+    .categoryBadge_2943a085 { align-items: center; border-radius: 10px; display: inline-flex; font-size: 11px; font-weight: 600; padding: 3px 10px; white-space: nowrap; }
+    .categoryBadge_2943a085.categoryTraining_2943a085 { background: #dbeafe; color: #1d4ed8; }
+    .categoryBadge_2943a085.categoryContribution_2943a085 { background: #f3e8ff; color: #7e22ce; }
+    .categoryBadge_2943a085.categoryCommunity_2943a085 { background: #dcfce7; color: #166534; }
+    .categoryBadge_2943a085.categoryDefault_2943a085 { background: #e2e8f0; color: #475569; }
+    .activityDate_2943a085 { color: #667085; }
+    .activityPoints_2943a085 { color: var(--accent); font-weight: 700; text-align: right; }
+    .noResults_2943a085, .noComments_2943a085 { background: #fff; border: 1px dashed #cbd5e1; border-radius: 12px; color: var(--muted); margin: 0 auto; max-width: 1200px; padding: 24px; text-align: center; }
+
+    .comments_2943a085 { background: transparent; border: 0; box-shadow: none; margin: 40px auto 0; max-width: 1200px; padding: 0; }
+    .commentsHeader_2943a085 { display: block; margin-bottom: 10px; }
+    .commentsHeader_2943a085 > div { margin-bottom: 14px; position: relative; }
+    .commentsHeader_2943a085 h3 { color: var(--text); font-size: 16px; font-weight: 700; margin: 0 0 4px; }
+    .commentsHeader_2943a085 p { color: var(--muted); font-size: 12px; margin: 0; }
+    .commentNav_2943a085 { border-bottom: 1px solid #d8e0eb; clear: both; color: #999; font-size: 1em; line-height: 2em; margin: 0 0 8px; padding: 0; }
+    .commentNavItems_2943a085 { display: flex; flex-wrap: wrap; gap: 0; margin: 0; padding: 0; list-style: none; }
+    .commentNavItem_2943a085 { background: transparent; border: 0; color: #98a2b3; cursor: pointer; display: inline-block; font-size: 13px; font-weight: 600; padding: 0 1em; position: relative; text-align: center; user-select: none; }
+    .commentNavItem_2943a085.active { color: var(--text); }
+    .commentNavItem_2943a085.active::after { background: var(--text); bottom: -1px; content: " "; display: block; height: 2px; left: 0; position: absolute; right: 0; }
+    .commentsIntro_2943a085 { display: grid; gap: 12px; margin-bottom: 14px; position: relative; }
+    .commentComposer_2943a085 { align-items: center; background: #fff; border: 1px solid var(--border); border-radius: 2px; box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.75); display: flex; gap: 10px; min-height: 40px; padding: 6px 12px; width: 100%; }
+    .commentComposerAvatar_2943a085 { align-items: center; background-position: 50%; background-size: cover; border-radius: 50%; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); display: flex; flex: 0 0 auto; height: 28px; justify-content: center; margin: 0; width: 28px; }
+    .commentComposerInput_2943a085 { background: transparent; border: 0; color: var(--text); flex: 1; font-size: 12px; min-width: 0; outline: none; padding: 0; width: 100%; }
+    .commentComposerInput_2943a085::placeholder { color: #98a2b3; }
+    .commentsList_2943a085 { display: grid; gap: 0; }
+    .commentCard_2943a085 { background: transparent; border: 0; border-bottom: 1px solid #e2e8f0; border-radius: 0; padding: 16px 0; }
+    .commentTop_2943a085 { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 8px; flex-wrap: nowrap; }
+    .commentAvatar_2943a085 { width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background-position: 50%; background-size: cover; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); flex: 0 0 auto; }
+    .commentMeta_2943a085 { display: grid; gap: 2px; grid-template-columns: 1fr auto; align-items: start; width: 100%; }
+    .commentName_2943a085 { margin: 0; font-weight: 700; color: #111827; font-size: 13px; }
+    .commentDate_2943a085 { color: #98a2b3; font-size: 11px; justify-self: end; white-space: nowrap; }
+    .commentContent_2943a085 { color: #111827; line-height: 1.45; margin: 0 0 10px 46px; white-space: pre-wrap; font-size: 13px; }
+    .commentActions_2943a085 { align-items: center; color: #667085; display: flex; flex-wrap: wrap; justify-content: flex-start; gap: 18px; font-size: 12px; margin-left: 46px; }
+    .commentLikes_2943a085 { color: var(--accent); font-weight: 700; }
+    .screenReaderOnly_2943a085 { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+
+    @media (max-width: 768px) {
+      .leaderboard_2943a085 { padding: 12px 8px 20px; }
+      .pageTitle_2943a085 { font-size: 20px; margin-bottom: 16px; }
+      .leaderboardPanel_2943a085 { padding: 14px 12px 16px; }
+      .header_2943a085 { margin-bottom: 18px; }
+      .headerContent_2943a085 h2 { font-size: 16px; }
+      .filterBar_2943a085 { align-items: stretch; flex-direction: column; padding: 14px; }
+      .filterBar_2943a085 .filters_2943a085 { flex-direction: column; width: 100%; }
+      .filterBar_2943a085 .search_2943a085 { min-width: unset; width: 100%; }
+      .podium_2943a085 { align-items: center; flex-direction: column; margin-bottom: 28px; padding-bottom: 24px; }
+      .podiumColumn_2943a085.podiumRank1_2943a085 { margin-top: 0; order: 1; }
+      .podiumColumn_2943a085.podiumRank2_2943a085 { order: 2; }
+      .podiumColumn_2943a085.podiumRank3_2943a085 { order: 3; }
+      .userRow_2943a085 { flex-direction: column; align-items: stretch; }
+      .userStats_2943a085 { justify-content: flex-start; padding-top: 12px; border-top: 1px solid #e2e8f0; }
+      .userTotal_2943a085 { display: none; }
+      .comments_2943a085 { margin-top: 32px; }
+      .commentsHeader_2943a085 > div::before { top: 49px; }
+      .commentsHeader_2943a085 > div::after { height: 38px; padding-left: 50px; }
+      .commentContent_2943a085, .commentActions_2943a085 { margin-left: 42px; }
+      .commentComposer_2943a085 { padding: 5px 10px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="leaderboard_2943a085">
+    <div class="leaderboardShell">
+      <h1 class="pageTitle_2943a085">Company Leader Board 2025</h1>
+      <div class="leaderboardPanel_2943a085">
+        <header class="header_2943a085">
+          <div class="headerContent_2943a085">
+            <h2>Leaderboard</h2>
+            <p>Top performers based on contributions and activity</p>
+          </div>
+        </header>
+
+        <section class="filterBar_2943a085" aria-label="Leaderboard filters">
+          <div class="filters_2943a085">
+            <div class="filterGroup_2943a085" data-filter="year">
+              <button class="filterControl_2943a085" type="button" aria-haspopup="listbox" aria-expanded="false"><span class="filterValue_2943a085" data-value>All Years</span><i class="filterCaret_2943a085 fa-solid fa-chevron-down" aria-hidden="true"></i></button>
+              <div class="dropdownPanel_2943a085" role="presentation"><div class="dropdownList_2943a085" role="listbox"></div></div>
+            </div>
+            <div class="filterGroup_2943a085" data-filter="quarter">
+              <button class="filterControl_2943a085" type="button" aria-haspopup="listbox" aria-expanded="false"><span class="filterValue_2943a085" data-value>All Quarters</span><i class="filterCaret_2943a085 fa-solid fa-chevron-down" aria-hidden="true"></i></button>
+              <div class="dropdownPanel_2943a085" role="presentation"><div class="dropdownList_2943a085" role="listbox"></div></div>
+            </div>
+            <div class="filterGroup_2943a085" data-filter="category">
+              <button class="filterControl_2943a085" type="button" aria-haspopup="listbox" aria-expanded="false"><span class="filterValue_2943a085" data-value>All Categories</span><i class="filterCaret_2943a085 fa-solid fa-chevron-down" aria-hidden="true"></i></button>
+              <div class="dropdownPanel_2943a085" role="presentation"><div class="dropdownList_2943a085" role="listbox"></div></div>
+            </div>
+          </div>
+          <div class="search_2943a085">
+            <label class="screenReaderOnly_2943a085" for="employeeSearch">Employee Name</label>
+            <div class="searchBox_2943a085"><span class="searchIcon_2943a085" aria-hidden="true">⌕</span><input id="employeeSearch" class="searchInput_2943a085" type="search" placeholder="Search employee..." autocomplete="off" /></div>
+          </div>
+        </section>
+
+        <section aria-label="Leaderboard podium"><div class="podium_2943a085" id="podium"></div></section>
+        <section aria-label="Leaderboard users"><div class="users_2943a085" id="userList"></div><div id="noResults" class="noResults_2943a085" hidden>No matching users found for the selected filters.</div></section>
+      </div>
+
+      <section class="comments_2943a085" aria-label="Comments section">
+        <div class="commentsHeader_2943a085">
+          <div class="commentsIntro_2943a085">
+            <div class="commentComposer_2943a085" aria-label="Add a comment">
+              <div class="commentComposerAvatar_2943a085" data-comment-avatar aria-hidden="true"></div>
+              <input class="commentComposerInput_2943a085" type="text" placeholder="Add a comment" aria-label="Add a comment" />
+            </div>
+          </div>
+          <nav class="commentNav_2943a085" aria-label="Comment sorting"><ul class="commentNavItems_2943a085" role="tablist"><li><button class="commentNavItem_2943a085 active" type="button" data-sort="newest" role="tab" aria-selected="true">Newest</button></li><li><button class="commentNavItem_2943a085" type="button" data-sort="oldest" role="tab" aria-selected="false">Oldest</button></li><li><button class="commentNavItem_2943a085" type="button" data-sort="popular" role="tab" aria-selected="false">Popular</button></li></ul></nav>
+        </div>
+        <div class="commentsList_2943a085" id="commentsList"></div>
+        <div id="noComments" class="noComments_2943a085" hidden>No comments</div>
+      </section>
+    </div>
+  </main>
+
+  <script>
+    const categoryConfig = {
+      Education: { iconClass: 'fa-solid fa-graduation-cap', className: 'categoryTraining_2943a085' },
+      'Public Speaking': { iconClass: 'fa-solid fa-chalkboard-user', className: 'categoryContribution_2943a085' },
+      'University Partnership': { iconClass: 'fa-solid fa-face-smile', className: 'categoryCommunity_2943a085' },
+      Mentoring: { iconClass: 'fa-solid fa-user-group', className: 'categoryContribution_2943a085' },
+      Dev2Dev: { iconClass: 'fa-solid fa-code', className: 'categoryTraining_2943a085' }
+    };
+
+    const avatarUrl = 'https://avatars.githubusercontent.com/u/278784460?v=4&size=64';
+    const firstNameParts = {
+      prefixes: ['Ari', 'Bel', 'Cai', 'Dae', 'Eli', 'Fio', 'Gra', 'Hae', 'Iri', 'Jae', 'Kio', 'Lia', 'Mira', 'Nora', 'Oli', 'Pha', 'Rae', 'Sia', 'Tora', 'Vela', 'Wyn', 'Zara'],
+      middles: ['a', 'e', 'i', 'o', 'u', 'ae', 'ia', 'io', 'oa', 'ui', ''],
+      suffixes: ['la', 'na', 'ra', 'ta', 'sa', 'ma', 'va', 'ya', 'ri', 'len', 'mir', 'ton', 'vin', 'lia', 'sha', 'n']
+    };
+    const lastNameParts = {
+      prefixes: ['Ash', 'Briar', 'Cedar', 'Dune', 'Ember', 'Frost', 'Glen', 'Harbor', 'Ivory', 'Juniper', 'Kestrel', 'Linden', 'Morrow', 'North', 'Oak', 'Pine', 'Quartz', 'River', 'Stone', 'Thorne', 'Umber', 'Vale', 'Willow', 'Yarrow', 'Zephyr'],
+      middles: ['a', 'e', 'i', 'o', 'u', 'ar', 'er', 'ia', 'io', 'or', ''],
+      suffixes: ['son', 'berg', 'brook', 'field', 'ford', 'hart', 'holm', 'land', 'more', 'ridge', 'shaw', 'stone', 'vale', 'wood', 'wright', 'well']
+    };
+    const roleTemplates = ['Senior Software Engineer', 'Lead QA Engineer', 'Product Designer', 'Data Analyst', 'Engineering Manager', 'Business Analyst', 'Frontend Engineer', 'Backend Engineer', 'Platform Engineer', 'UX Researcher'];
+    const topicPool = ['API design', 'delivery planning', 'pairing habits', 'quality automation', 'team demos', 'onboarding', 'system design', 'technical writing', 'student mentoring', 'peer coaching', 'release readiness', 'design systems'];
+    const commentTemplates = [
+      'This row has the score breakdown I need, so I can validate the activity list quickly.',
+      'The filters are doing the right thing here. Search first, then narrow by quarter if needed.',
+      'Please keep the activity history clean so the totals stay easy to review later.',
+      'The leaderboard should stay transparent, so the breakdown table matters more than the total.',
+      'The row expansion is the fastest way to verify where the points came from.'
+    ];
+    const activityTemplates = {
+      Education: ['Hosted a workshop on {topic}', 'Prepared a learning recap on {topic}', 'Shared a walkthrough on {topic}'],
+      'Public Speaking': ['Presented on {topic} at the team forum', 'Led a talk about {topic} for peers', 'Shared a live demo on {topic}'],
+      'University Partnership': ['Coordinated a university session about {topic}', 'Supported a partner workshop on {topic}', 'Mentored students during a collaboration on {topic}'],
+      Mentoring: ['Mentored teammates on {topic}', 'Coached a squad through {topic}', 'Ran a mentoring session about {topic}'],
+      Dev2Dev: ['Delivered a Dev2Dev session on {topic}', 'Organized a Dev2Dev lab about {topic}', 'Presented a Dev2Dev walkthrough on {topic}']
+    };
+
+    function buildDate(year, monthIndex, day) {
+      return `${year}-${String(monthIndex + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+    }
+
+    function seededValue(index, salt) {
+      const raw = Math.sin((index + 1) * (salt + 1) * 12.9898) * 43758.5453;
+      return raw - Math.floor(raw);
+    }
+
+    function pickPart(parts, index, salt) {
+      const value = seededValue(index, salt);
+      return parts[Math.floor(value * parts.length) % parts.length];
+    }
+
+    function buildFirstName(index) {
+      const value = `${pickPart(firstNameParts.prefixes, index, 1)}${pickPart(firstNameParts.middles, index, 2)}${pickPart(firstNameParts.suffixes, index, 3)}`.replace(/[^a-z]/gi, '');
+      return value.charAt(0).toUpperCase() + value.slice(1).toLowerCase();
+    }
+
+    function buildSurname(index) {
+      const value = `${pickPart(lastNameParts.prefixes, index, 4)}${pickPart(lastNameParts.middles, index, 5)}${pickPart(lastNameParts.suffixes, index, 6)}`.replace(/[^a-z]/gi, '');
+      return value.charAt(0).toUpperCase() + value.slice(1).toLowerCase();
+    }
+
+    function buildActivities(index) {
+      const categories = Object.keys(categoryConfig);
+      return [0, 1, 2].map((offset) => {
+        const category = categories[(index + offset) % categories.length];
+        const templates = activityTemplates[category];
+        const topic = topicPool[(index * 3 + offset) % topicPool.length];
+        const title = templates[(index + offset) % templates.length].replace('{topic}', topic);
+        const monthIndex = (index * 2 + offset * 3) % 12;
+        const day = ((index * 5 + offset * 7) % 27) + 1;
+        const points = [8, 16, 24, 32, 48, 64][(index * 2 + offset * 3) % 6];
+        return { title, category, date: buildDate(2025, monthIndex, day), points };
+      }).sort((left, right) => new Date(right.date) - new Date(left.date));
+    }
+
+    function buildComment(index, full) {
+      const day = 25 - (index % 20);
+      const hour = 8 + (index % 9);
+      const minute = 10 + (index % 40);
+      return {
+        id: `c${index + 1}`,
+        author: full,
+        avatar: avatarUrl,
+        date: new Date(Date.UTC(2026, 1, day, hour, minute)).toISOString(),
+        likes: ((index * 3) % 17) + 1,
+        text: commentTemplates[index % commentTemplates.length]
+      };
+    }
+
+    function buildUsers(count = 200) {
+      return Array.from({ length: count }, (_, index) => {
+        const name = buildFirstName(index);
+        const surname = buildSurname(index);
+        const role = `${roleTemplates[index % roleTemplates.length]} ${index + 1}`;
+        const full = `${name} ${surname}`;
+        return {
+          name,
+          surname,
+          role,
+          avatar: avatarUrl,
+          expanded: false,
+          activity: buildActivities(index),
+          comments: index < 5 ? [buildComment(index, full)] : []
+        };
+      });
+    }
+
+    const users = buildUsers();
+
+    const state = { filters: { year: 'All Years', quarter: 'All Quarters', category: 'All Categories', search: '' }, commentSort: 'newest', openFilter: null, expandedUsers: new Set(users.filter((user) => user.expanded).map((user) => `${user.name} ${user.surname}`)) };
+    const elements = { podium: document.getElementById('podium'), userList: document.getElementById('userList'), noResults: document.getElementById('noResults'), commentsList: document.getElementById('commentsList'), noComments: document.getElementById('noComments'), employeeSearch: document.getElementById('employeeSearch'), commentComposerAvatar: document.querySelector('[data-comment-avatar]') };
+    const years = [...new Set(users.flatMap((user) => user.activity.map((activity) => String(new Date(activity.date).getFullYear()))))].sort((left, right) => Number(right) - Number(left));
+    const quarterOptions = ['All Quarters', 'Q1', 'Q2', 'Q3', 'Q4'];
+    const categoryOptions = ['All Categories', ...Object.keys(categoryConfig)];
+
+    function getQuarter(dateString) { return `Q${Math.floor(new Date(dateString).getMonth() / 3) + 1}`; }
+    function fullName(user) { return `${user.name} ${user.surname}`; }
+    function initials(user) { return `${user.name[0]}${user.surname[0]}`.toUpperCase(); }
+    function formatDate(dateString) { return new Intl.DateTimeFormat('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }).format(new Date(dateString)); }
+    function formatCommentDate(dateString) { return new Intl.DateTimeFormat('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' }).format(new Date(dateString)); }
+    function getUserScore(user) { return user.activity.reduce((total, activity) => total + activity.points, 0); }
+    function getCategoryCounts(user) { return user.activity.reduce((counts, activity) => { counts[activity.category] = (counts[activity.category] || 0) + 1; return counts; }, {}); }
+    function filterActivities(user) { const search = state.filters.search.trim().toLowerCase(); return user.activity.filter((activity) => (!search || fullName(user).toLowerCase().includes(search)) && (state.filters.year === 'All Years' || String(new Date(activity.date).getFullYear()) === state.filters.year) && (state.filters.quarter === 'All Quarters' || getQuarter(activity.date) === state.filters.quarter) && (state.filters.category === 'All Categories' || activity.category === state.filters.category)); }
+
+    function closeDropdowns() { document.querySelectorAll('.filterGroup_2943a085').forEach((group) => { group.querySelector('.filterControl_2943a085').classList.remove('is-open'); group.querySelector('.filterControl_2943a085').setAttribute('aria-expanded', 'false'); group.querySelector('.dropdownPanel_2943a085').classList.remove('open'); }); state.openFilter = null; }
+    function openDropdown(group) { const key = group.dataset.filter; const isOpen = state.openFilter === key; closeDropdowns(); if (!isOpen) { group.querySelector('.filterControl_2943a085').classList.add('is-open'); group.querySelector('.filterControl_2943a085').setAttribute('aria-expanded', 'true'); group.querySelector('.dropdownPanel_2943a085').classList.add('open'); state.openFilter = key; } }
+    function renderFilterLists() { document.querySelectorAll('.filterGroup_2943a085').forEach((group) => { const type = group.dataset.filter; const list = group.querySelector('.dropdownList_2943a085'); const valueDisplay = group.querySelector('.filterValue_2943a085'); const values = type === 'year' ? ['All Years', ...years] : type === 'quarter' ? quarterOptions : categoryOptions; valueDisplay.textContent = state.filters[type]; list.innerHTML = values.map((value) => `<button type="button" class="dropdownItem_2943a085 ${state.filters[type] === value ? 'is-selected' : ''}" role="option" aria-selected="${state.filters[type] === value}" data-value="${value}">${value}</button>`).join(''); }); }
+    function podiumMarkup(usersList) { return usersList.slice(0, 3).map((user, index) => { const rank = [1, 2, 3][index]; const size = rank === 1 ? 112 : 80; const badgeSize = rank === 1 ? 40 : 32; return `<article class="podiumColumn_2943a085 podiumRank${rank}_2943a085"><div class="podiumUser_2943a085"><div class="podiumAvatarContainer_2943a085"><div class="podiumAvatar_2943a085" style="width:${size}px;height:${size}px;background-image:url('${user.avatar}');">${fullName(user)}</div><div class="podiumRankBadge_2943a085" style="width:${badgeSize}px;height:${badgeSize}px;">${rank}</div></div><h3 class="podiumName_2943a085">${fullName(user)}</h3><p class="podiumRole_2943a085">${user.role}</p><div class="podiumScore_2943a085"><i class="scoreIcon_2943a085 fa-solid fa-star" aria-hidden="true"></i><span>${getUserScore(user)}</span></div></div><div class="podiumBlock_2943a085" data-rank="${rank}"><div class="podiumBlockTop_2943a085"></div><span class="podiumRankNumber_2943a085">${rank}</span></div></article>`; }).join(''); }
+    function userCardMarkup(user, index) { const full = fullName(user); const expanded = state.expandedUsers.has(full); const categoryCounts = getCategoryCounts(user); const activities = filterActivities(user); const activeCategories = Object.entries(categoryCounts).map(([category, count]) => { const config = categoryConfig[category] || { iconClass: 'fa-solid fa-circle', className: 'categoryDefault_2943a085' }; return `<div class="categoryStat_2943a085" title="${category}"><div class="categoryIcon_2943a085" aria-hidden="true"><i class="${config.iconClass}"></i></div><div class="categoryCount_2943a085">${count}</div></div>`; }).join(''); const rows = activities.map((activity) => { const config = categoryConfig[activity.category] || { className: 'categoryDefault_2943a085' }; return `<tr><td class="activityName_2943a085">${activity.title}</td><td><span class="categoryBadge_2943a085 ${config.className}">${activity.category}</span></td><td class="activityDate_2943a085">${formatDate(activity.date)}</td><td class="activityPoints_2943a085">+${activity.points}</td></tr>`; }).join(''); return `<article class="userRowContainer_2943a085 ${expanded ? 'expanded_2943a085' : ''}" data-user="${full}"><div class="userRow_2943a085"><div class="userIdentity_2943a085"><div class="rank_2943a085">${index + 1}</div><div class="avatar_2943a085" style="width:58px;height:58px;background-image:url('${user.avatar}');">${full}</div><div class="userInfo_2943a085"><h3 class="userName_2943a085">${full}</h3><p class="userRole_2943a085">${user.role}</p></div></div><div class="userStats_2943a085">${activeCategories}<div class="userTotal_2943a085"><div class="totalLabel_2943a085">TOTAL</div><div class="totalScore_2943a085"><i class="scoreIcon_2943a085 fa-solid fa-star" aria-hidden="true"></i><span>${getUserScore(user)}</span></div></div><button class="expandButton_2943a085" type="button" data-action="toggle-user" aria-label="${expanded ? 'Collapse' : 'Expand'} activities"><i class="fa-solid fa-chevron-down" aria-hidden="true"></i></button></div></div><div class="details_2943a085"><h4 class="detailsTitle_2943a085">Recent Activity</h4><div class="tableWrapper_2943a085"><table class="activityTable_2943a085"><thead><tr><th>Activity</th><th>Category</th><th>Date</th><th>Points</th></tr></thead><tbody>${rows || '<tr><td colspan="4" class="activityDate_2943a085">No activities match the selected filters.</td></tr>'}</tbody></table></div></div></article>`; }
+    function renderLeaderboard() { const searchTerm = state.filters.search.trim(); const filteredUsers = users.map((user) => ({ user, activities: filterActivities(user) })).filter(({ activities }) => activities.length > 0 || (searchTerm === '' && state.filters.year === 'All Years' && state.filters.quarter === 'All Quarters' && state.filters.category === 'All Categories')).sort((left, right) => getUserScore(right.user) - getUserScore(left.user)); elements.podium.innerHTML = podiumMarkup(filteredUsers.map(({ user }) => user)); if (filteredUsers.length === 0) { elements.userList.innerHTML = ''; elements.noResults.hidden = false; } else { elements.noResults.hidden = true; elements.userList.innerHTML = filteredUsers.map(({ user }, index) => userCardMarkup(user, index)).join(''); } }
+    function renderComments() { const allComments = users.flatMap((user) => user.comments.map((comment) => ({ ...comment, userName: fullName(user) }))); const sorted = [...allComments].sort((left, right) => state.commentSort === 'oldest' ? new Date(left.date) - new Date(right.date) : state.commentSort === 'popular' ? right.likes - left.likes || new Date(right.date) - new Date(left.date) : new Date(right.date) - new Date(left.date)); elements.commentsList.innerHTML = sorted.map((comment) => `<article class="commentCard_2943a085"><div class="commentTop_2943a085"><div class="commentAvatar_2943a085" style="background-image:url('${comment.avatar || avatarUrl}');">${comment.author}</div><div class="commentMeta_2943a085"><p class="commentName_2943a085">${comment.author}</p><div class="commentDate_2943a085">${formatCommentDate(comment.date)} · ${comment.userName}</div></div></div><p class="commentContent_2943a085">${comment.text}</p><div class="commentActions_2943a085"><span>Reply · Share</span><span class="commentLikes_2943a085">♥ ${comment.likes}</span></div></article>`).join(''); elements.noComments.hidden = sorted.length > 0; }
+    function applyFilter(type, value) { state.filters[type] = value; renderFilterLists(); renderLeaderboard(); }
+    function bindEvents() { document.addEventListener('click', (event) => { const filterGroup = event.target.closest('.filterGroup_2943a085'); const filterControl = event.target.closest('.filterControl_2943a085'); const dropdownItem = event.target.closest('.dropdownItem_2943a085'); const expandButton = event.target.closest('[data-action="toggle-user"]'); const commentSortButton = event.target.closest('.commentNavItem_2943a085'); if (expandButton) { const card = expandButton.closest('.userRowContainer_2943a085'); const userName = card.dataset.user; if (state.expandedUsers.has(userName)) { state.expandedUsers.delete(userName); card.classList.remove('expanded_2943a085'); expandButton.setAttribute('aria-label', 'Expand activities'); } else { state.expandedUsers.add(userName); card.classList.add('expanded_2943a085'); expandButton.setAttribute('aria-label', 'Collapse activities'); } return; } if (commentSortButton) { state.commentSort = commentSortButton.dataset.sort; document.querySelectorAll('.commentNavItem_2943a085').forEach((button) => { const active = button === commentSortButton; button.classList.toggle('active', active); button.setAttribute('aria-selected', String(active)); }); renderComments(); return; } if (dropdownItem) { const group = dropdownItem.closest('.filterGroup_2943a085'); applyFilter(group.dataset.filter, dropdownItem.dataset.value); closeDropdowns(); return; } if (filterControl && filterGroup) { openDropdown(filterGroup); return; } if (!event.target.closest('.filterGroup_2943a085')) { closeDropdowns(); } }); window.addEventListener('scroll', closeDropdowns, { passive: true }); window.addEventListener('resize', closeDropdowns); elements.employeeSearch.addEventListener('input', (event) => { state.filters.search = event.target.value; renderLeaderboard(); }); }
+    function init() { if (elements.commentComposerAvatar) { elements.commentComposerAvatar.style.backgroundImage = `url('${users[0]?.avatar || avatarUrl}')`; } renderFilterLists(); renderLeaderboard(); renderComments(); bindEvents(); }
+    init();
+  </script>
+</body>
+</html>

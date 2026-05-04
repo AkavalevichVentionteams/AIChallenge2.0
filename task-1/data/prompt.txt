@@ -1,0 +1,145 @@
+You are a senior front-end engineer. Refactor the provided single-file HTML export (singlefileext.html) of an existing SharePoint “Leader Board” page into clean, maintainable, data-driven front-end code while preserving the current visual design as closely as possible.
+
+Source context:
+- The file is a raw single-file HTML copy of an existing SharePoint page.
+- It already contains the required styles, fonts, icons, and images.
+- Do not redesign the page.
+- Do not change the overall layout, spacing, typography, visual identity, or styling.
+
+Primary goal:
+Transform the page so it is driven by JavaScript data structures rather than hardcoded repeated markup, and implement the interactions described below.
+
+Output:
+Generate a completely new single-file HTML document that meets the requirements. The new file should be clean, well-structured, and maintainable, with all dynamic content rendered from JavaScript data arrays. No changes to the singlefileext.html.
+
+What must be implemented:
+
+1) Data model driven by JavaScript
+- Replace the current repeated user markup with a JavaScript array of user objects.
+- Each user object must use user-friendly values, not placeholder technical names.
+- Required fields for each user:
+  - name
+  - surname
+  - role
+  - activity
+- Each user's activity list must be a JavaScript array of user-friendly activity objects/values.
+- Each user's comments must be a JavaScript array of user-friendly comment objects/values.
+- The page should render all visible leaderboard content from this data model.
+- Keep the data easy to update manually.
+
+Recommended data shape:
+- users = [
+    {
+      name: "John",
+      surname: "Smith",
+      role: "Sales Manager",
+      activity: [...],
+      comments: [...]
+    }
+  ]
+
+2) Leaderboard filters
+Implement four filters at the top of the leaderboard:
+
+- Year (selectbox)
+- Quarter (selectbox)
+- Category (selectbox)
+- Employee Name (free-text search input)
+
+Behavior requirements:
+- The Category filter must use the same open-list format already shown in the example on the page.
+- Use the same interaction pattern for Year and Quarter.
+- Year options:
+  - “All Years” as the default value
+  - distinct years extracted from activity dates in the dataset
+- Quarter options:
+  - “All Quarters” as the default value
+  - Q1, Q2, Q3, Q4
+- Category options:
+  - preserve the existing category values and style already present in the example list
+- The filter dropdown list must open when the user clicks the appropriate filter.
+- The dropdown list must close automatically:
+  - after scrolling
+  - after clicking anywhere outside the filter
+- Employee Name must be a live text search against the user's displayed name/surname.
+- Filters should work together and update the visible leaderboard results correctly.
+- Use sensible default states so the page loads with no filters applied.
+
+3) Expand/collapse activities per user
+- Each user must have a hidden-by-default activities list.
+- The list must expand/collapse when the ChevronDown button is clicked.
+- USER_1 is the example of the expanded activities list.
+- All other users must support the same expand/collapse interaction.
+- Keep the current visual behavior and animation style if one exists.
+- The activities list should be rendered from the user's activity data array.
+
+4) Comments section sorting
+At the bottom of the page, add or preserve the Comments section with three clickable sort buttons in this exact order:
+
+- Newest (default)
+- Oldest
+- Popular (by likes)
+
+Behavior requirements:
+- Newest must be active by default on page load.
+- Clicking a sort button reorders the comments list immediately.
+- Popular sorts by like count descending.
+- Sorting should only affect the comments section, not the leaderboard users.
+- Keep the existing comment card styling and layout.
+
+5) Remove irrelevant content
+- Everything above the “Company Leader Board 2025” heading can be removed if it is not needed for the main design.
+- The footer needs to be removed as well.
+- Preserve the main leaderboard design and all functionality below that heading.
+- Do not leave broken spacing or empty wrappers after removing the content.
+
+Implementation requirements:
+- Keep everything in a single HTML file unless the existing structure clearly benefits from separation.
+- Use plain HTML, CSS, and vanilla JavaScript unless the file already depends on a framework.
+- Prefer clean, readable, modular code.
+- Do not duplicate static markup for each user; render from data.
+- Use semantic HTML where possible.
+- Use event delegation where appropriate.
+- Avoid hardcoding repeated content in the DOM.
+- Ensure the page remains responsive and usable.
+- Preserve existing styles/classes as much as possible so the visual result stays consistent.
+- Do not change the styling at all. The entire appearance must remain the same as the original page.
+- Style changes are strictly prohibited - the differences are only functional.
+
+Filtering logic requirements:
+- The leaderboard should be filtered by:
+  - selected year
+  - selected quarter
+  - selected category
+  - employee name search text
+- Activity records should contain the data needed to determine:
+  - date
+  - year
+  - quarter
+  - category
+- Compute year and quarter from activity dates if needed.
+- The displayed leaderboard should update dynamically when filters change.
+- When a user has no matching activities, hide them entirely or show a clearly styled “no results” state consistent with the page design.
+
+UX requirements:
+- Open filter lists should close on scroll and outside click.
+- Dropdown positioning should not break layout.
+- The ChevronDown toggle should indicate expanded/collapsed state clearly.
+- Comments sort buttons should have clear active state styling.
+- Keep all interactions smooth and immediate.
+
+Deliverables:
+1. Refactored HTML/CSS/JS code.
+2. All leaderboard content powered by JavaScript data arrays.
+3. Working filters for Year, Quarter, Category, and Employee Name.
+4. Working expand/collapse for activities per user.
+5. Working comment sort buttons.
+6. Clean, maintainable code with no unnecessary clutter.
+
+Before editing, inspect the file structure carefully and preserve the existing page’s design system. After refactoring, verify that:
+- all users render correctly,
+- filter combinations work,
+- dropdowns close properly,
+- activities toggle correctly,
+- comment sorting works,
+- and the page still visually matches the original SharePoint leaderboard style.
